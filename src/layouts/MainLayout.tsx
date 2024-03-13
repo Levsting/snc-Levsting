@@ -7,10 +7,11 @@ import {
 import { Inter } from "next/font/google";
 import classNames from "classnames";
 import { Button } from "@/components/Button";
-import { Person, User, personQuery } from "@/utils/common/person";
+import { Person, User, fetchPerson } from "@/utils/common/person";
 import { useQuery } from "react-query";
 import { PersonCard } from "@/components/PersonCard";
 import { CurrentTime } from "@/components/CurrentTime";
+import { useLogPersonData } from "@/hooks/useLogPersonDetails";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,7 +29,7 @@ export const MainLayout: FunctionComponent<
     refetch,
   } = useQuery<User>(
     "person",
-    ({ signal }) => personQuery(signal, selectedPerson),
+    ({ signal }) => fetchPerson(signal, selectedPerson),
     {
       enabled: !!selectedPerson,
       retry: false,
@@ -41,6 +42,8 @@ export const MainLayout: FunctionComponent<
   useEffect(() => {
     refetch({ cancelRefetch: true });
   }, [selectedPerson, refetch]);
+
+  useLogPersonData(personData);
 
   return (
     <main

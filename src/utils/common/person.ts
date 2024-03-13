@@ -13,7 +13,7 @@ export enum Person {
   PersonC = "PersonC",
 }
 
-export const personQuery = (
+export const fetchPerson = (
   signal: AbortSignal | undefined,
   personId: Person | null,
 ): Promise<User> => {
