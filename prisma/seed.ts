@@ -2,6 +2,12 @@ import { Prisma, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+const MOCK_COMPANIES: Prisma.CompanyCreateInput[] = [
+  { name: "CompanyA" },
+  { name: "CompanyB" },
+  { name: "CompanyC" },
+];
+
 import UserCreateInput = Prisma.UserCreateInput;
 const MOCK_USERS: UserCreateInput[] = [
   {
@@ -27,8 +33,20 @@ const MOCK_USERS: UserCreateInput[] = [
 ];
 
 async function main() {
+  await prisma.companiesOnUsers.deleteMany();
   await prisma.user.deleteMany();
+  await prisma.company.deleteMany();
+
+  await prisma.company.createMany({ data: MOCK_COMPANIES });
   await prisma.user.createMany({ data: MOCK_USERS });
+
+  const companyUser = await prisma.user.findFirst();
+  const company = await prisma.company.findFirst();
+  if (company && companyUser) {
+    await prisma.companiesOnUsers.create({
+      data: { userId: companyUser.id, companyId: company.id },
+    });
+  }
 }
 
 main()
