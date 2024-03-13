@@ -29,6 +29,7 @@ export const PersonData: FunctionComponent<PersonDataProps> = ({ data }) => {
           alt="User photo"
           className="absolute object-cover"
           fill={true}
+          sizes="100px"
         />
       </div>
 
