@@ -2,7 +2,7 @@ import { User } from "@/utils/common/person";
 import { FunctionComponent, PropsWithChildren } from "react";
 import { PersonDataSkeleton } from "./PersonDataSkeleton";
 import { PersonData } from "./PersonData";
-import { PersonCardError } from "./PersonCardError";
+import { PersonCardMessage } from "./PersonCardMessage";
 import classNames from "classnames";
 
 type PersonCardProps = {
@@ -21,7 +21,12 @@ export const PersonCard: FunctionComponent<
         "border-2 border-slate-600 rounded-2xl",
       )}
     >
-      {!isLoading && error && <PersonCardError />}
+      {!data && !isLoading && !error && (
+        <PersonCardMessage text="Please select the person!" />
+      )}
+      {!isLoading && error && (
+        <PersonCardMessage text="Something went wrong!" />
+      )}
       {!isLoading && data && !error && <PersonData data={data} />}
       {isLoading && <PersonDataSkeleton />}
     </div>

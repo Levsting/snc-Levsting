@@ -40,7 +40,9 @@ export const MainLayout: FunctionComponent<
   );
 
   useEffect(() => {
-    refetch({ cancelRefetch: true });
+    if (selectedPerson) {
+      refetch({ cancelRefetch: true });
+    }
   }, [selectedPerson, refetch]);
 
   useLogPersonData(personData);

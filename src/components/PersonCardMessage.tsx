@@ -1,7 +1,13 @@
 import classNames from "classnames";
 import { FunctionComponent } from "react";
 
-export const PersonCardError: FunctionComponent = () => {
+type PersonCardMessageProps = {
+  text: string;
+};
+
+export const PersonCardMessage: FunctionComponent<PersonCardMessageProps> = ({
+  text,
+}) => {
   return (
     <p
       className={classNames(
@@ -9,7 +15,7 @@ export const PersonCardError: FunctionComponent = () => {
         "flex items-center justify-center",
       )}
     >
-      Something went wrong!
+      {text}
     </p>
   );
 };
