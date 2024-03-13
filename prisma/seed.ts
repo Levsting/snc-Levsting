@@ -27,6 +27,7 @@ const MOCK_USERS: UserCreateInput[] = [
 ];
 
 async function main() {
+  await prisma.user.deleteMany();
   await prisma.user.createMany({ data: MOCK_USERS });
 }
 
