@@ -1,8 +1,9 @@
-import { PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-const MOCK_USERS = [
+import UserCreateInput = Prisma.UserCreateInput;
+const MOCK_USERS: UserCreateInput[] = [
   {
     backgroundImageUrl:
       "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
