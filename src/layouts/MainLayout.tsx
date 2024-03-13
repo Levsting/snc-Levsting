@@ -10,6 +10,7 @@ import { Button } from "@/components/Button";
 import { Person, User, personQuery } from "@/utils/common/person";
 import { useQuery } from "react-query";
 import { PersonCard } from "@/components/PersonCard";
+import { CurrentTime } from "@/components/CurrentTime";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -49,6 +50,10 @@ export const MainLayout: FunctionComponent<
         "flex flex-col justify-center items-center",
       )}
     >
+      <div>
+        <CurrentTime />
+      </div>
+
       <div className={classNames("flex gap-2", "mt-[30px]")}>
         {Object.values(Person).map((person) => (
           <Button
